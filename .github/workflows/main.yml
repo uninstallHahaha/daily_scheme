@@ -23,4 +23,4 @@ jobs:
         if: github.event.schedule == '40 7 * * 1,2,3,4,5,6'
         run: pip install -r ./requirements.txt && python ./weekup.py
       - name: github.event.schedule == '0 8 * * 1,2,3,4,5,6'
-        run: pip install -r ../requirements.txt && python ../morning_start.py
+        run: pip install -r ./requirements.txt && python ./morning_start.py
