@@ -9,17 +9,15 @@ from datetime import date, datetime, timedelta
 from wechatpy import WeChatClient, WeChatClientException
 from wechatpy.client.api import WeChatMessage
 
+# 🐔 onsMd64OpzrEE0V9FDkz7AOKevwI
 
-# GetParams 从环境变量中获取变量
+chicken_id = "onsMd64OpzrEE0V9FDkz7AOKevwI"
+
+
+# GetParams 生成运行参数
 def GetParams() -> run_types.Params:
-    user_ids = os.getenv("USER_ID", "").split("\n")
-
-    if not user_ids:
-        print("请设置 USER_ID, 若存在多个 ID 用回车分开")
-        exit(422)
-
     return run_types.NewParams(
-        user_ids=user_ids,
+        user_ids=[chicken_id],
     )
 
 
