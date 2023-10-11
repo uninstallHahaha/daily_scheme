@@ -10,15 +10,16 @@ on:
   - cron:  '30 19 * * 1,2,3,4,5,6' # night start 1~6
   - cron:  '30 23 * * 1,2,3,4,5,6' # night end 1~6
   - cron:  '15 1 * * 1,2,3,4,5,6'  # sleep 1~6
-  - cron:  '0 9 * * 7' # weekend
+  - cron:  '0 9 * * 0' # weekend
   workflow_dispatch:
 
 jobs:
-  test_schedule:
+  send_message:
     runs-on: ubuntu-latest
+    name: send daily scheme
     steps:
-      - name: Not on Monday or Wednesday
-        if: github.event.schedule != '30 5 * * 1,3'
-        run: echo "This step will be skipped on Monday and Wednesday"
-      - name: Every time
-        run: echo "This step will always run"
+      - name: sender on week up
+        if: github.event.schedule == '40 7 * * 1,2,3,4,5,6'
+        run: pip install -r ./requirements.txt && python ./weekup.py
+      - name: github.event.schedule == '0 8 * * 1,2,3,4,5,6'
+        run: pip install -r ./requirements.txt && python ./morning_start.py
