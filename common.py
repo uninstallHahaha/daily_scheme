@@ -10,14 +10,16 @@ from wechatpy import WeChatClient, WeChatClientException
 from wechatpy.client.api import WeChatMessage
 
 # 🐔 onsMd64OpzrEE0V9FDkz7AOKevwI
+# gaoyuan onsMd6-JUU4J0MEV-D1Zkc80n6Gs
 
 chicken_id = "onsMd64OpzrEE0V9FDkz7AOKevwI"
+gaoyuan_id = "onsMd6-JUU4J0MEV-D1Zkc80n6Gs"
 
 
 # GetParams 生成运行参数
 def GetParams() -> run_types.Params:
     return run_types.NewParams(
-        user_ids=[chicken_id],
+        user_ids=[chicken_id, gaoyuan_id],
     )
 
 
