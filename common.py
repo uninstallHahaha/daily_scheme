@@ -4,6 +4,7 @@ import math
 import requests
 import random
 import re
+import json
 from datetime import date, datetime, timedelta
 from wechatpy import WeChatClient, WeChatClientException
 from wechatpy.client.api import WeChatMessage
@@ -91,7 +92,7 @@ def GetTipByWheather(weather: run_types.WeatherModal) -> str:
 
 # 彩虹屁 接口不稳定，所以失败的话会重新调用，直到成功
 def GetWords() -> str:
-    words = requests.get("https://api.shadiao.pro/chp")
+    words = requests.get("https://api.shadiao.pro/du")
     if words.status_code != 200:
         return GetWords()
     return words.json()["data"]["text"]
@@ -110,9 +111,18 @@ def get_random_color():
 
 
 # 发送消息
-def SendMsg(data: run_types.SendData):
+def SendMsg(
+    app_id: str,
+    app_secret: str,
+    template_id: str,
+    user_ids: slice,
+    data: run_types.SendData,
+):
+    # 实例转 dict
+    data = dict(data)
+
     try:
-        client = WeChatClient(data.app_id, data.app_secret)
+        client = WeChatClient(app_id, app_secret)
     except WeChatClientException as e:
         print("微信获取 token 失败，请检查 APP_ID 和 APP_SECRET, 或当日调用量是否已达到微信限制。")
         exit(502)
@@ -120,9 +130,9 @@ def SendMsg(data: run_types.SendData):
     wm = WeChatMessage(client)
     count = 0
     try:
-        for user_id in data.user_ids:
+        for user_id in user_ids:
             print("正在发送给 %s, 数据如下: %s" % (user_id, data))
-            res = wm.send_template(user_id, data.template_id, data)
+            res = wm.send_template(user_id, template_id, data)
             count += 1
     except WeChatClientException as e:
         print("微信端返回错误：%s。错误代码: %d" % (e.errmsg, e.errcode))

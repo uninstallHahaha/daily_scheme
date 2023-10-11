@@ -1,3 +1,6 @@
+from json import JSONEncoder
+
+
 # 运行参数
 class Params:
     def __init__(self):
@@ -45,3 +48,24 @@ class SendData:
         self.temperature = ""
         self.tip = ""
         self.words = ""
+
+    def keys(self):
+        return (
+            "city",
+            "date",
+            "time",
+            "week_day",
+            "weather",
+            "humidity",
+            "temperature",
+            "tip",
+            "words",
+        )
+
+    def __getitem__(self, item):
+        return getattr(self, item)
+
+
+class SendDataEncoder(JSONEncoder):
+    def default(self, o):
+        return o.__dict__

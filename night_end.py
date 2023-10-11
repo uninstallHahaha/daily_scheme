@@ -24,7 +24,7 @@ if __name__ == "__main__":
     # 获取天气提示语
     weatherTip = common.GetTipByWheather(weather=weather)
     # 彩虹屁
-    words = common.GetWords()
+    words = "终于结束一天的学习了, 洗澡放松下"
     # 星期几
     week_day = common.GetWeekDay(today=today)
 
@@ -53,7 +53,7 @@ if __name__ == "__main__":
     data.words = {"value": words, "color": common.get_random_color()}
 
     # weekup 模板
-    weekup_template_id = "Imqgu7EJd3km_dx5pop3q76UKUv0j_wonoUgkHZLSvI"
+    weekup_template_id = "M-dPfuLCDbBGFJc54wFhBKpyx7SAplcfOfZRjWm8qTk"
     common.SendMsg(
         params.app_id, params.app_secret, weekup_template_id, params.user_ids, data
     )
