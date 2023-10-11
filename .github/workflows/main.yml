@@ -41,7 +41,7 @@ jobs:
       architecture: 'x64'
     if: github.event.schedule == '0 8 * * 1,2,3,4,5,6' 
     run: pip install -r ./requirements.txt && python ./morning_start.py
-
+    
     # moon
     - name: sender on moon
     uses: actions/setup-python@v2
@@ -104,12 +104,3 @@ jobs:
       architecture: 'x64'
     if: github.event.schedule == '0 9 * * 7'
     run: pip install -r ./requirements.txt && python ./weekend.py
-
-    env:
-      APP_ID: ${{ secrets.APP_ID }}
-      APP_SECRET: ${{ secrets.APP_SECRET }}
-      TEMPLATE_ID: ${{ secrets.TEMPLATE_ID }}
-      USER_ID: ${{ secrets.USER_ID }}
-      START_DATE: ${{ secrets.START_DATE }}
-      BIRTHDAY: ${{ secrets.BIRTHDAY }}
-      CITY: ${{ secrets.CITY }}
