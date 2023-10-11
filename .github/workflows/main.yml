@@ -19,8 +19,46 @@ jobs:
     name: send daily scheme
     steps:
       - uses: actions/checkout@v3
+      # week up
       - name: sender on week up
         if: github.event.schedule == '40 7 * * 1,2,3,4,5,6'
         run: pip install -r ./requirements.txt && python ./weekup.py
-      - name: github.event.schedule == '0 8 * * 1,2,3,4,5,6'
+      # morning start
+      - name: morning_start
+        if: github.event.schedule == '0 8 * * 1,2,3,4,5,6'
         run: pip install -r ./requirements.txt && python ./morning_start.py
+      # moon
+      - name: sender on moon
+        if: github.event.schedule == '0 11 * * 1,2,3,4,5,6' 
+        run: pip install -r ./requirements.txt && python ./moon.py
+      # sport
+      - name: sender on sport
+        if: github.event.schedule == '0 16 * * 1,2,3,4,5,6'
+        run: pip install -r ./requirements.txt && python ./sport.py
+      # sport end
+      - name: sender on sport end
+        if: github.event.schedule == '30 16 * * 1,2,3,4,5,6'
+        run: pip install -r ./requirements.txt && python ./sport_end.py
+      # night start
+      - name: sender on night start
+        if: github.event.schedule == '30 19 * * 1,2,3,4,5,6' 
+        run: pip install -r ./requirements.txt && python ./night_start.py
+      # night end
+      - name: sender on night end
+        if: github.event.schedule == '30 23 * * 1,2,3,4,5,6' 
+        run: pip install -r ./requirements.txt && python ./night_end.py
+      # sleep
+      - name: sender on sleep
+        if: github.event.schedule == '15 1 * * 1,2,3,4,5,6' 
+        run: pip install -r ./requirements.txt && python ./sleep.py
+      # weekend
+      - name: sender on weekend
+        if: github.event.schedule == '0 9 * * 7'
+        run: pip install -r ./requirements.txt && python ./weekend.py
+
+
+
+
+
+
+
