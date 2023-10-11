@@ -1,0 +1,115 @@
+name: morning
+on:
+  schedule:
+  - cron:  '40 7 * * 1,2,3,4,5,6' # week up 1~6
+  - cron:  '0 8 * * 1,2,3,4,5,6' # morning start 1~6
+  - cron:  '0 11 * * 1,2,3,4,5,6' # moon 1~6
+  - cron:  '0 13 * * 1,2,3,4,5,6'  # moon week up 1~6
+  - cron:  '0 16 * * 1,2,3,4,5,6'  # sport 1~6
+  - cron:  '30 16 * * 1,2,3,4,5,6' # sport end 1~6
+  - cron:  '30 19 * * 1,2,3,4,5,6' # night start 1~6
+  - cron:  '30 23 * * 1,2,3,4,5,6' # night end 1~6
+  - cron:  '15 1 * * 1,2,3,4,5,6'  # sleep 1~6
+  - cron:  '0 9 * * 7' # weekend
+  workflow_dispatch:
+
+jobs:
+  send_message:
+    runs-on: ubuntu-latest
+    name: send daily scheme
+
+    steps:
+    - name: checkout
+      uses: actions/checkout@v3
+      with:
+        ref: master
+
+    # week up
+    - name: sender on week up
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+        architecture: 'x64'
+      if: github.event.schedule == '40 7 * * 1,2,3,4,5,6' 
+      run: pip install -r ./requirements.txt && python ./weekup.py
+
+    # morning start
+    - name: sender on morning start
+    uses: actions/setup-python@v2
+    with:
+      python-version: '3.x'
+      architecture: 'x64'
+    if: github.event.schedule == '0 8 * * 1,2,3,4,5,6' 
+    run: pip install -r ./requirements.txt && python ./morning_start.py
+
+    # moon
+    - name: sender on moon
+    uses: actions/setup-python@v2
+    with:
+      python-version: '3.x'
+      architecture: 'x64'
+    if: github.event.schedule == '0 11 * * 1,2,3,4,5,6' 
+    run: pip install -r ./requirements.txt && python ./moon.py
+
+    # sport
+    - name: sender on sport
+    uses: actions/setup-python@v2
+    with:
+      python-version: '3.x'
+      architecture: 'x64'
+    if: github.event.schedule == '0 16 * * 1,2,3,4,5,6'
+    run: pip install -r ./requirements.txt && python ./sport.py
+
+    # sport end
+    - name: sender on sport end
+    uses: actions/setup-python@v2
+    with:
+      python-version: '3.x'
+      architecture: 'x64'
+    if: github.event.schedule == '30 16 * * 1,2,3,4,5,6'
+    run: pip install -r ./requirements.txt && python ./sport_end.py
+
+    # night start
+    - name: sender on night start
+    uses: actions/setup-python@v2
+    with:
+      python-version: '3.x'
+      architecture: 'x64'
+    if: github.event.schedule == '30 19 * * 1,2,3,4,5,6' 
+    run: pip install -r ./requirements.txt && python ./night_start.py
+
+    # night end
+    - name: sender on night end
+    uses: actions/setup-python@v2
+    with:
+      python-version: '3.x'
+      architecture: 'x64'
+    if: github.event.schedule == '30 23 * * 1,2,3,4,5,6' 
+    run: pip install -r ./requirements.txt && python ./night_end.py
+
+    # sleep
+    - name: sender on sleep
+    uses: actions/setup-python@v2
+    with:
+      python-version: '3.x'
+      architecture: 'x64'
+    if: github.event.schedule == '15 1 * * 1,2,3,4,5,6' 
+    run: pip install -r ./requirements.txt && python ./sleep.py
+
+    # weekend
+    - name: sender on weekend
+    uses: actions/setup-python@v2
+    with:
+      python-version: '3.x'
+      architecture: 'x64'
+    if: github.event.schedule == '0 9 * * 7'
+    run: pip install -r ./requirements.txt && python ./weekend.py
+
+    env:
+      APP_ID: ${{ secrets.APP_ID }}
+      APP_SECRET: ${{ secrets.APP_SECRET }}
+      TEMPLATE_ID: ${{ secrets.TEMPLATE_ID }}
+      USER_ID: ${{ secrets.USER_ID }}
+      START_DATE: ${{ secrets.START_DATE }}
+      BIRTHDAY: ${{ secrets.BIRTHDAY }}
+      CITY: ${{ secrets.CITY }}
