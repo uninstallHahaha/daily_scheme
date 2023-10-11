@@ -1,4 +1,5 @@
 from datetime import date, datetime, timedelta
+import datetime as _datetime
 import math
 from wechatpy import WeChatClient, WeChatClientException
 from wechatpy.client.api import WeChatMessage
@@ -52,8 +53,12 @@ if __name__ == "__main__":
     }
     data.words = {"value": words, "color": common.get_random_color()}
 
+    # 倒计时
+    end = _datetime.datetime(2023, 12, 24)
+    data.to_end = {"value": (end - today).days, "color": common.get_random_color()}
+
     # weekup 模板
-    weekup_template_id = "Imqgu7EJd3km_dx5pop3q76UKUv0j_wonoUgkHZLSvI"
+    weekup_template_id = "zwDrs0BhoDZKkNXTtQOD_iicldFswptrXdK0yUVdVf4"
     common.SendMsg(
         params.app_id, params.app_secret, weekup_template_id, params.user_ids, data
     )

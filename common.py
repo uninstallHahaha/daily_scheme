@@ -12,7 +12,7 @@ from wechatpy.client.api import WeChatMessage
 
 # GetParams 从环境变量中获取变量
 def GetParams() -> run_types.Params:
-    start_date = os.getenv("START_DATE")
+    end_date = os.getenv("END_DATE")
     city = os.getenv("CITY")
     birthday = os.getenv("BIRTHDAY")
 
@@ -39,7 +39,7 @@ def GetParams() -> run_types.Params:
         exit(422)
 
     return run_types.NewParams(
-        start_date=start_date,
+        end_date=end_date,
         city=city,
         birthday=birthday,
         app_id=app_id,

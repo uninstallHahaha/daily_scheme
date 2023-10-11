@@ -4,9 +4,8 @@ from json import JSONEncoder
 # 运行参数
 class Params:
     def __init__(self):
-        self.start_date = ""
+        self.end_date = ""
         self.city = ""
-        self.birthday = ""
         self.app_id = ""
         self.app_secret = ""
         self.user_ids = ""
@@ -15,12 +14,11 @@ class Params:
 
 # NewParams 创建参数实例
 def NewParams(
-    start_date, city, birthday, app_id, app_secret, user_ids, tempalate_id
+    end_date, city, birthday, app_id, app_secret, user_ids, tempalate_id
 ) -> Params:
     ret = Params()
-    ret.start_date = start_date
+    ret.end_date = end_date
     ret.city = city
-    ret.birthday = birthday
     ret.app_id = app_id
     ret.app_secret = app_secret
     ret.user_ids = user_ids
@@ -48,6 +46,7 @@ class SendData:
         self.temperature = ""
         self.tip = ""
         self.words = ""
+        self.to_end = 0
 
     def keys(self):
         return (
@@ -60,6 +59,7 @@ class SendData:
             "temperature",
             "tip",
             "words",
+            "to_end",
         )
 
     def __getitem__(self, item):
