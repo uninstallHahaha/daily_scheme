@@ -4,25 +4,21 @@ from json import JSONEncoder
 # 运行参数
 class Params:
     def __init__(self):
-        self.end_date = ""
         self.city = ""
         self.app_id = ""
         self.app_secret = ""
         self.user_ids = ""
-        self.template_id = ""
 
 
 # NewParams 创建参数实例
 def NewParams(
-    end_date, city, birthday, app_id, app_secret, user_ids, tempalate_id
+    user_ids,
 ) -> Params:
     ret = Params()
-    ret.end_date = end_date
-    ret.city = city
-    ret.app_id = app_id
-    ret.app_secret = app_secret
+    ret.city = "321000"
+    ret.app_id = "wx214addf2ecd34f2b"
+    ret.app_secret = "1263507cdb5443517923113db1480788"
     ret.user_ids = user_ids
-    ret.template_id = tempalate_id
     return ret
 
 

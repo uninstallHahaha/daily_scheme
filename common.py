@@ -12,40 +12,14 @@ from wechatpy.client.api import WeChatMessage
 
 # GetParams 从环境变量中获取变量
 def GetParams() -> run_types.Params:
-    end_date = os.getenv("END_DATE")
-    city = os.getenv("CITY")
-    birthday = os.getenv("BIRTHDAY")
-
-    app_id = os.getenv("APP_ID")
-    app_secret = os.getenv("APP_SECRET")
-
     user_ids = os.getenv("USER_ID", "").split("\n")
-    template_id = os.getenv("TEMPLATE_ID")
-
-    if app_id is None or app_secret is None:
-        print("请设置 APP_ID 和 APP_SECRET")
-        exit(422)
 
     if not user_ids:
         print("请设置 USER_ID, 若存在多个 ID 用回车分开")
         exit(422)
 
-    if template_id is None:
-        print("请设置 TEMPLATE_ID")
-        exit(422)
-
-    if city is None or city == "":
-        print("请设置 city")
-        exit(422)
-
     return run_types.NewParams(
-        end_date=end_date,
-        city=city,
-        birthday=birthday,
-        app_id=app_id,
-        app_secret=app_secret,
         user_ids=user_ids,
-        tempalate_id=template_id,
     )
 
 
