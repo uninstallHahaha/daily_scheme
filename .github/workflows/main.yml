@@ -1,16 +1,17 @@
 name: do scheme notice
 on:
+  # crontab 时间按照东八区调整
   schedule:
-  - cron:  '40 7 * * 1,2,3,4,5,6' # week up 1~6
-  - cron:  '0 8 * * 1,2,3,4,5,6' # morning start 1~6
-  - cron:  '0 11 * * 1,2,3,4,5,6' # moon 1~6
-  - cron:  '0 13 * * 1,2,3,4,5,6'  # moon week up 1~6
-  - cron:  '0 16 * * 1,2,3,4,5,6'  # sport 1~6
-  - cron:  '30 16 * * 1,2,3,4,5,6' # sport end 1~6
-  - cron:  '30 19 * * 1,2,3,4,5,6' # night start 1~6
-  - cron:  '30 23 * * 1,2,3,4,5,6' # night end 1~6
-  - cron:  '15 1 * * 1,2,3,4,5,6'  # sleep 1~6
-  - cron:  '0 9 * * 0' # weekend
+  - cron:  '40 15 * * 1,2,3,4,5,6' # week up 1~6
+  - cron:  '0 16 * * 1,2,3,4,5,6' # morning start 1~6
+  - cron:  '0 19 * * 1,2,3,4,5,6' # moon 1~6
+  - cron:  '0 21 * * 1,2,3,4,5,6'  # moon week up 1~6
+  - cron:  '0 0 * * 1,2,3,4,5,6'  # sport 1~6
+  - cron:  '30 0 * * 1,2,3,4,5,6' # sport end 1~6
+  - cron:  '30 3 * * 1,2,3,4,5,6' # night start 1~6
+  - cron:  '30 7 * * 1,2,3,4,5,6' # night end 1~6
+  - cron:  '15 9 * * 1,2,3,4,5,6'  # sleep 1~6
+  - cron:  '0 17 * * 0' # weekend
   workflow_dispatch:
 
 jobs:
