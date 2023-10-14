@@ -8,6 +8,15 @@ import random
 import re
 import common
 import run_types
+import datetime as _datetime
+
+
+# 计算到11月计划的剩余天数
+def calc_to_end() -> int:
+    today = _datetime.datetime.now()
+    end = _datetime.datetime(2023, 10, 31)
+    sub = (end - today).days
+    return sub
 
 
 if __name__ == "__main__":
@@ -24,8 +33,9 @@ if __name__ == "__main__":
     # 获取天气提示语
     weatherTip = common.GetTipByWheather(weather=weather)
     # 彩虹屁
-    words = "终于结束一天的学习了, 洗澡放松下"
-    # 星期几
+    words = (
+        "终于结束一天的学习了, 洗澡放松下 👉 距离你的十七日计划还剩下 " + str(calc_to_end()) + " 天, 继续加油哦 🤌🏻"  # 星期几
+    )
     week_day = common.GetWeekDay(today=today)
 
     # 发送给微信接口的数据
